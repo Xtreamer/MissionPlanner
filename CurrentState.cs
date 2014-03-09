@@ -260,7 +260,14 @@ namespace MissionPlanner
 
         //battery
         [DisplayText("Bat Voltage (V)")]
-        public float battery_voltage { get { return _battery_voltage; } set { if (_battery_voltage == 0) _battery_voltage = value; _battery_voltage = value * 0.1f + _battery_voltage * 0.9f; } }
+        public float battery_voltage {
+            get { 
+                return _battery_voltage; 
+            } 
+            set {
+                if (_battery_voltage == 0) _battery_voltage = value; _battery_voltage = value * 0.1f + _battery_voltage * 0.9f; 
+            } 
+        }
         private float _battery_voltage;
         [DisplayText("Bat Remaining (%)")]
         public int battery_remaining { get { return _battery_remaining; } set { _battery_remaining = value; if (_battery_remaining < 0 || _battery_remaining > 100) _battery_remaining = 0; } }
@@ -271,6 +278,16 @@ namespace MissionPlanner
         private DateTime _lastcurrent = DateTime.MinValue;
         [DisplayText("Bat used EST (mah)")]
         public float battery_usedmah { get; set; }
+        [DisplayText("Aux Bat Voltage (V)")]
+        public float battery_aux_voltage { 
+            get { 
+                return _battery_aux_voltage; 
+            } 
+            set {
+                if (_battery_aux_voltage == 0) _battery_aux_voltage = value; _battery_aux_voltage = value * 0.1f + _battery_aux_voltage * 0.9f; 
+            } 
+        }
+        private float _battery_aux_voltage;
 
         public float HomeAlt { get { return (float)HomeLocation.Alt; } set { } }
         public PointLatLngAlt HomeLocation = new PointLatLngAlt();
@@ -761,6 +778,7 @@ namespace MissionPlanner
                         battery_voltage = (float)sysstatus.voltage_battery / 1000.0f;
                         battery_remaining = sysstatus.battery_remaining;
                         current = (float)sysstatus.current_battery / 100.0f;
+                        battery_aux_voltage = (float)sysstatus.voltage_aux_battery / 1000.0f;
 
                         packetdropremote = sysstatus.drop_rate_comm;
 
