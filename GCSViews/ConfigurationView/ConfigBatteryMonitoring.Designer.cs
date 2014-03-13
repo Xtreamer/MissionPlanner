@@ -56,8 +56,18 @@
             this.label4 = new System.Windows.Forms.Label();
             this.txt_meascurrent = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.TXT_aux_divider = new System.Windows.Forms.TextBox();
+            this.TXT_aux_voltage = new System.Windows.Forms.TextBox();
+            this.TXT_aux_measuredvoltage = new System.Windows.Forms.TextBox();
+            this.CMB_aux_pin_number = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             this.groupBox4.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // label47
@@ -240,10 +250,93 @@
             resources.ApplyResources(this.label3, "label3");
             this.label3.Name = "label3";
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.label5);
+            this.groupBox1.Controls.Add(this.label7);
+            this.groupBox1.Controls.Add(this.label8);
+            this.groupBox1.Controls.Add(this.label9);
+            this.groupBox1.Controls.Add(this.TXT_aux_divider);
+            this.groupBox1.Controls.Add(this.TXT_aux_voltage);
+            this.groupBox1.Controls.Add(this.TXT_aux_measuredvoltage);
+            this.groupBox1.Controls.Add(this.CMB_aux_pin_number);
+            resources.ApplyResources(this.groupBox1, "groupBox1");
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.TabStop = false;
+            // 
+            // label5
+            // 
+            resources.ApplyResources(this.label5, "label5");
+            this.label5.Name = "label5";
+            // 
+            // label7
+            // 
+            resources.ApplyResources(this.label7, "label7");
+            this.label7.Name = "label7";
+            // 
+            // label8
+            // 
+            resources.ApplyResources(this.label8, "label8");
+            this.label8.Name = "label8";
+            // 
+            // label9
+            // 
+            resources.ApplyResources(this.label9, "label9");
+            this.label9.Name = "label9";
+            // 
+            // TXT_aux_divider
+            // 
+            resources.ApplyResources(this.TXT_aux_divider, "TXT_aux_divider");
+            this.TXT_aux_divider.Name = "TXT_aux_divider";
+            this.TXT_aux_divider.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.TXT_aux_divider_PreviewKeyDown);
+            this.TXT_aux_divider.Validating += new System.ComponentModel.CancelEventHandler(this.TXT_aux_divider_Validating);
+            this.TXT_aux_divider.Validated += new System.EventHandler(this.TXT_aux_divider_Validated);
+            // 
+            // TXT_aux_voltage
+            // 
+            resources.ApplyResources(this.TXT_aux_voltage, "TXT_aux_voltage");
+            this.TXT_aux_voltage.Name = "TXT_aux_voltage";
+            this.TXT_aux_voltage.ReadOnly = true;
+            // 
+            // TXT_aux_measuredvoltage
+            // 
+            resources.ApplyResources(this.TXT_aux_measuredvoltage, "TXT_aux_measuredvoltage");
+            this.TXT_aux_measuredvoltage.Name = "TXT_aux_measuredvoltage";
+            this.TXT_aux_measuredvoltage.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.TXT_aux_measuredvoltage_PreviewKeyDown);
+            this.TXT_aux_measuredvoltage.Validating += new System.ComponentModel.CancelEventHandler(this.TXT_aux_measuredvoltage_Validating);
+            this.TXT_aux_measuredvoltage.Validated += new System.EventHandler(this.TXT_aux_measuredvoltage_Validated);
+            // 
+            // CMB_aux_pin_number
+            // 
+            this.CMB_aux_pin_number.DisplayMember = "Text";
+            this.CMB_aux_pin_number.DropDownWidth = 200;
+            this.CMB_aux_pin_number.FormattingEnabled = true;
+            this.CMB_aux_pin_number.Items.AddRange(new object[] {
+            resources.GetString("CMB_aux_pin_number.Items"),
+            resources.GetString("CMB_aux_pin_number.Items1"),
+            resources.GetString("CMB_aux_pin_number.Items2"),
+            resources.GetString("CMB_aux_pin_number.Items3"),
+            resources.GetString("CMB_aux_pin_number.Items4"),
+            resources.GetString("CMB_aux_pin_number.Items5"),
+            resources.GetString("CMB_aux_pin_number.Items6"),
+            resources.GetString("CMB_aux_pin_number.Items7"),
+            resources.GetString("CMB_aux_pin_number.Items8"),
+            resources.GetString("CMB_aux_pin_number.Items9"),
+            resources.GetString("CMB_aux_pin_number.Items10"),
+            resources.GetString("CMB_aux_pin_number.Items11"),
+            resources.GetString("CMB_aux_pin_number.Items12"),
+            resources.GetString("CMB_aux_pin_number.Items13"),
+            resources.GetString("CMB_aux_pin_number.Items14")});
+            resources.ApplyResources(this.CMB_aux_pin_number, "CMB_aux_pin_number");
+            this.CMB_aux_pin_number.Name = "CMB_aux_pin_number";
+            this.CMB_aux_pin_number.ValueMember = "Number";
+            this.CMB_aux_pin_number.SelectedIndexChanged += new System.EventHandler(this.CMB_aux_pin_SelectedIndexChanged);
+            // 
             // ConfigBatteryMonitoring
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.CHK_speechbattery);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -260,6 +353,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -292,5 +387,14 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox txt_meascurrent;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.TextBox TXT_aux_divider;
+        private System.Windows.Forms.TextBox TXT_aux_voltage;
+        private System.Windows.Forms.TextBox TXT_aux_measuredvoltage;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.ComboBox CMB_aux_pin_number;
     }
 }
