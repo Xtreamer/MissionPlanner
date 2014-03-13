@@ -393,11 +393,12 @@ namespace MissionPlanner.GCSViews.ConfigurationView
         private void InitializeAuxBatteryPanel()
         {
             startup = true;
-            if (MainV2.comPort.MAV.param["AUX_MONITOR"] != null)
+            if (MainV2.comPort.MAV.param[BatteryParams.BATT_AUX_MONITOR] != null)
             {
-                if ((float)MainV2.comPort.MAV.param["AUX_MONITOR"] != 0)
+                if ((float)MainV2.comPort.MAV.param[BatteryParams.BATT_AUX_MONITOR] != 0)
                 {
-                    CMB_aux_pin_number.SelectedIndex = getIndex(CMB_aux_pin_number, (int)float.Parse(MainV2.comPort.MAV.param["AUX_PIN"].ToString()));
+                    var auxPin = (int)float.Parse(MainV2.comPort.MAV.param[BatteryParams.BATT_AUX_PIN].ToString());
+                    CMB_aux_pin_number.SelectedValue = auxPin;
                 }
                 else
                 {
@@ -409,8 +410,8 @@ namespace MissionPlanner.GCSViews.ConfigurationView
             TXT_aux_measuredvoltage.Text = TXT_aux_voltage.Text;
 
             // new
-            if (MainV2.comPort.MAV.param["AUX_MULT"] != null)
-                TXT_aux_divider.Text = MainV2.comPort.MAV.param["AUX_MULT"].ToString();
+            if (MainV2.comPort.MAV.param[BatteryParams.BATT_AUX_MULT] != null)
+                TXT_aux_divider.Text = MainV2.comPort.MAV.param[BatteryParams.BATT_AUX_MULT].ToString();
             
             startup = false;
 
@@ -595,7 +596,7 @@ namespace MissionPlanner.GCSViews.ConfigurationView
 
             try
             {
-                MainV2.comPort.setParam(new string[] { "AUX_MULT" }, float.Parse(TXT_aux_divider.Text));
+                MainV2.comPort.setParam(new string[] { BatteryParams.BATT_AUX_MULT }, float.Parse(TXT_aux_divider.Text));
             }
             catch { CustomMessageBox.Show("Set AUX_MULT Failed", "Error"); }
         }
@@ -606,7 +607,7 @@ namespace MissionPlanner.GCSViews.ConfigurationView
                 return;
             try
             {
-                MainV2.comPort.setParam(new string[] { "AUX_MULT" }, float.Parse(TXT_aux_divider.Text));
+                MainV2.comPort.setParam(new string[] { BatteryParams.BATT_AUX_MULT }, float.Parse(TXT_aux_divider.Text));
 
             }
             catch { CustomMessageBox.Show("Set AUX_MULT Failed", "Error"); }
@@ -618,7 +619,7 @@ namespace MissionPlanner.GCSViews.ConfigurationView
                 return;
             try
             {
-                if (MainV2.comPort.MAV.param["AUX_MONITOR"] == null)
+                if (MainV2.comPort.MAV.param[BatteryParams.BATT_AUX_MONITOR] == null)
                 {
                     CustomMessageBox.Show("Not Available", "Error");
                 }
@@ -628,14 +629,14 @@ namespace MissionPlanner.GCSViews.ConfigurationView
 
                     if (!batteryPin.Number.HasValue)
                     {                        
-                        MainV2.comPort.setParam("AUX_PIN", -1);
+                        MainV2.comPort.setParam(BatteryParams.BATT_AUX_PIN, -1);
                     }
                     else
                     {
-                        MainV2.comPort.setParam("AUX_PIN", batteryPin.Number.Value);
+                        MainV2.comPort.setParam(BatteryParams.BATT_AUX_PIN, batteryPin.Number.Value);
                     }
 
-                    MainV2.comPort.setParam("AUX_MONITOR", batteryPin.Number.HasValue ? 1 : 0);
+                    MainV2.comPort.setParam(BatteryParams.BATT_AUX_MONITOR, batteryPin.Number.HasValue ? 1 : 0);
                 }
             }
             catch { CustomMessageBox.Show("Set BATT_MONITOR,BATT_VOLT_PIN,BATT_CURR_PIN Failed", "Error"); }
@@ -645,7 +646,7 @@ namespace MissionPlanner.GCSViews.ConfigurationView
         {
             var pinNumbers = new List<BatteryPin>();
             pinNumbers.Add(new BatteryPin { Number = null, Text = "-disabled-" });
-            for (int i = 1; i < 15; i++)
+            for (int i = 0; i < 15; i++)
             {
                 pinNumbers.Add(new BatteryPin { Number = i, Text = i.ToString() });
             }
@@ -669,5 +670,12 @@ namespace MissionPlanner.GCSViews.ConfigurationView
             if (e.KeyData == Keys.Enter)
                 TXT_aux_divider_Validated(sender, e);
         }
+
+        internal class BatteryParams
+        {
+            public static string BATT_AUX_PIN = "BATT_AUX_PIN";
+            public static string BATT_AUX_MULT = "BATT_AUX_MULT";
+            public static string BATT_AUX_MONITOR = "BATT_AUX_MONITOR";
+        };
     }
 }
