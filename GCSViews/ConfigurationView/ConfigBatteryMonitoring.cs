@@ -639,7 +639,7 @@ namespace MissionPlanner.GCSViews.ConfigurationView
                     MainV2.comPort.setParam(BatteryParams.BATT_AUX_MONITOR, batteryPin.Number.HasValue ? 1 : 0);
                 }
             }
-            catch { CustomMessageBox.Show("Set BATT_MONITOR,BATT_VOLT_PIN,BATT_CURR_PIN Failed", "Error"); }
+            catch { CustomMessageBox.Show("Set BATT_MONITOR, BATT_VOLT_PIN, BATT_CURR_PIN Failed", "Error"); }
         }
 
         private List<BatteryPin> getPinNumbers()
